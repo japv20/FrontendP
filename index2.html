@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Create a form to submit a new project and the owner -->
+    <form method="POST">
+        <label for="project"> Project </label>
+        <input type="text" name="project" id="projects"> <br>
+        <label for="owner"> Owner </label>
+        <input type="text" name="name" id="owners"> <br>
+        <button id="submition"> Submit </button>
+    </form>
+
+    <ul class="projects"> </ul>
+    
+</body>
+
+<script>
+    window.addEventListener("DOMContentLoaded", (event) => {
+
+    const form = document.getElementById('submition')
+    form.addEventListener('click', (event) => {
+        event.preventDefault();
+        console.log("I have been submitted")
+
+        const projectName = document.querySelector('form input[name="project"]').value
+        console.log(`Project name ${projectName}`);
+
+        fetch('http://localhost:3000/projects', {
+            headers: {
+                'Accept':'application/json',
+                'Content-Type':'application/json'
+            },
+            method: 'POST',
+            //body: JSON.stringify({title:"This is my title"})
+            body: JSON.stringify({name:projectName})
+        })
+        .then(response => response.json())
+        .then((response) => {
+            console.log(`Response is ${response}`);
+        let list = document.getElementsByClassName('projects')[0]
+        response.forEach(item => {
+            list.innerHTML += `<li> ${item.name} </li>`
+        })
+        })
+
+        // const projectName = document.getElementById('projects').value;
+        // const authorName = document.getElementById('owners').value;
+
+        // console.log(`${projectName} and ${authorName}`)
+
+        // let formInput = {
+        //     project: projectName,
+        //     name: authorName
+        // }
+
+        // let input = document.getElementById('input').innerHTML += formInput;
+        
+        // fetch("http://localhost:3000/")
+        // .then(response=>response.json())
+        // .then((response) => {
+        //     let list = document.getElementsByClassName('projects')[0]
+        //     list.innerHTML += `<li> ${response[0].name} </li>`
+        // })
+    })
+
+    // fetch("http://localhost:3000/projects")
+    // .then(response=>response.json())
+    // .then((response)=> {
+    //     let list = document.getElementsByClassName('projects')[0]
+    //        list.innerHTML += `<li> ${response[0].name} </li>`
+    //     })
+
+    // fetch('http://localhost:3000/projects')
+    // .then(response => response.json())
+    })
+
+</script>
+
+</html>
