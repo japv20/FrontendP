@@ -53,3 +53,27 @@ h1 {
     text-align: center;
     font-size: var(--header-size);
 }
+
+#addForm {
+    padding: 10px 10px 10px 10px;
+    width: 30%;
+    border: 1px solid black;
+}
+
+label {
+    font-size: 18px;
+}
+
+input {
+    width: 90%;
+    border-radius: 100px;
+}
+
+#inputImg {
+    padding: 5px 5px;
+}
+
+button {
+    width: 100px;
+    padding: 5px 5px;
+}
